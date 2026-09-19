@@ -6,7 +6,19 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export const resolvers = {
     Query: {
-        users: () => { return users; }
+        users: (_, { filter }) => {
+            if (!filter || !filter.trim()) {
+                return users;
+            }
+
+            const searchFilter = filter.trim().toLowerCase();
+
+            return users.filter(
+                (u) => 
+                    u.name.toLowerCase().includes(searchFilter) ||
+                    u.email.toLowerCase().includes(searchFilter)
+            );
+        },
     },
 
     Mutation: {

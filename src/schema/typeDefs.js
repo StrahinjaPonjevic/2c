@@ -6,7 +6,7 @@ export const typeDefs = `
   }
 
   type Query {
-    users: [User!]!
+    users(filter: String): [User!]!
   }
 
   type Mutation {
