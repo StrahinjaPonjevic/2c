@@ -42,6 +42,19 @@ export const resolvers = {
 
             users.push(newUser);
             return newUser;
-        }
+        },
+
+        deleteUser: (_, { id }) => {
+            const userIndex = users.findIndex((u) => u.id === id);
+
+            if (userIndex === -1) {
+                throw new GraphQLError('Korisnik sa datim id-jem nije pronadjen', {
+                    extensions: { code: 'NOT_FOUND' },
+                });
+            }
+
+            users.splice(userIndex, 1);
+            return true;
+        },
     }
 };

@@ -11,5 +11,6 @@ export const typeDefs = `
 
   type Mutation {
     addUser(name: String!, email: String!): User!
+    deleteUser(id: ID!): Boolean!
   }
 `;
